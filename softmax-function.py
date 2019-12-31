@@ -1,7 +1,7 @@
 import numpy as np
 
-# Softmax function is used for cases when we have more than 2 posibble outcomes such as with image classification of
-# different types of animals. When we only need to determine binary outpusts suchs as dog / no dog then we can use
+# Softmax function is used for cases when we have more than 2 possible outcomes such as with image classification of
+# different types of animals. When we only need to determine binary outputs such as dog / no dog then we can use
 # sigmoid. For n =2 softmax is still valid and gives the same output as sigmoid.
 
 # Write a function that takes as input a list of numbers, and returns

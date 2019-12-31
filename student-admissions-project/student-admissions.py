@@ -156,6 +156,8 @@ learnrate = 0.5
 # Training function
 def train_nn(features, targets, epochs, learnrate):
     # Use to same seed to make debugging easier
+    print('features', features.shape)
+    print('targets', targets.shape)
     np.random.seed(42)
 
     n_records, n_features = features.shape
