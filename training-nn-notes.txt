@@ -1,0 +1,59 @@
+Overfitting and Underfitting:
+Overfitting: The NN is trained to high precision on the training set and thus is not generalized enough for regular use
+Underfitting: The NN is too simple and has a high error rate for general cases
+
+Early Stopping:
+As we train the NN over many epochs, it continues to fit itself very close to the training set. Initially, while it is
+under fitted, the training and testing errors are both high but as we continue to train it (increase the number of epochs)
+we get to state that is just right where the errors for training and testing data are low. Further training results in
+training error to reduce, but the testing data error increase the model starts to overfit. Early stopping is used to stop
+the model training close to the best case error (Just right).
+
+Regularization:
+- Large coefficients for weights results in overfitting; thus we want to punish high coefficients/weights. We do this by
+adding a term to the error calculation that is large when the weight(s) is large and thus increasing the penality during
+backpropagation
+- L1: Add the sums of the absolute values of the weights are multiplied by a constant. The constant determines how much do we want to penalize the weights.
+    -- Sparsity (1, 0, 0, 1, 1): Good for feature selection.
+    -- When we have a lot of features, this helps us in defining which ones we should use and which to ignore.
+        Small weights tend to go to zero and thus help select features.
+- L2: Add the sums of the squares of the values of the weights multiplied by a constant. The constant determines how much do we want to penalize the weights.
+    -- Sparsity(0.5, -0.1, -0.2, 0.09, 0.2): Normally better for training models.
+    -- Tries to maintain all the weights homogenously small
+
+Dropout:
+Sometimes one part of the network (nodes) have large weights, and other have very small weights, which results in the nodes
+with large weights dominating the network and the subsequent training. This results in skewed models that do not perform
+optimally.
+We solve this by turning off nodes during epochs(training cycles). We do this by setting a variable that determines the
+probability if a node is turned on or off during each epoch. Thus during the whole training, nodes get switched off and on
+and thus prevents large weights from dominating the training.
+
+Local Minima Problem:
+- Random restart: By starting from random points(Weights) we increase the probability to finding the global minima or
+at least a better local minima
+
+Vanishing Gradient:
+- Sigmoid activation function: Sigmoid function results in very small differentials/gradients, which mean we are only able
+to take small steps, and for multi-layer networks these steps are even smaller. Thus we need a different function with
+better/bigger gradient decent steps. The output layer nodes might still use sigmoid as the output might need to be a
+probability between 0 and 1.
+- Hyperbolic Tangent: (e^x  - e^-x) / (e^x + e^-x)
+- Rectified Linear Unit: relu(x) = x if x>= 0 else 0
+
+
+Batch and Stochastic Gradient Descent:
+Each epoch consists of running through all the test data and updating the weights. For large data sets and complex networks,
+this requires a lot of memory and time. The stochastic approach consists of taking a small segment of that data and going
+through the forward step and backpropagation and then adding all the changes.
+
+Learning Rate Decay:
+If it's too big, you are more likely to miss the local minimum. Decreasing the learning rate would help. The best kind
+of learning rate coefficient would decrease as the error decreases.
+
+Momentum (Solving Local Minimum):
+Momentum helps to push past local minimums. The idea is to see if going past the local minimum and increase the error
+would result in a decrease of the error again as we find another minimum. We do this by multiplying the steps we take
+(Changes in weight) by a coefficient (B) between 0 and 1 to enable us to gather momentum. We multiply the lastest step by
+1, the one before it by B, the one before that by B^2 and then B^3 and so on. This allows us to make sure that steps that
+are far away from the current minimum have less impact.
